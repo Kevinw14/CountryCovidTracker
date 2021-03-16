@@ -20,12 +20,6 @@ class Main: NSObject, CovidRequestDelegate {
     func covidRequestData(request: CovidRequest, data: Data) {
         do {
             let country: Country = try JSONDecoder().decode(Country.self, from: data)
-            for stat in country.greece.stats {
-                if stat.date.isLastDate || stat.date.isTwoWeeksIn {
-                    print(stat.date)
-                }
-//                print(stat.date)
-            }
             var everyTwoWeeks: [Stat] = []
             
             for stat in country.greece.stats {
