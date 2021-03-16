@@ -26,6 +26,7 @@ class Greece: Codable {
 
 class Stat: Codable, Equatable {
     let totalCases: Int
+    let totalDeaths: Int
     private let dateString: String
     var date: Date {
         let dateFormatter: DateFormatter = DateFormatter()
@@ -38,10 +39,12 @@ class Stat: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.dateString = try container.decode(String.self, forKey: .dateString)
         self.totalCases = try container.decodeIfPresent(Int.self, forKey: .totalCases) ?? 0
+        self.totalDeaths = try container.decodeIfPresent(Int.self, forKey: .totalDeaths) ?? 0 
     }
     
     enum CodingKeys: String, CodingKey {
         case totalCases = "total_cases"
+        case totalDeaths = "total_deaths"
         case dateString = "date"
     }
     
