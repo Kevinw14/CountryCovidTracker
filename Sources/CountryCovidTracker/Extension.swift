@@ -18,28 +18,15 @@ extension Date {
     private func endOfMonth(months: Int, days: Int) -> Date {
         var components = DateComponents()
         components.month = months
-        components.day = -days
+        components.day = days
         return Calendar(identifier: .gregorian).date(byAdding: components, to: startOfMonth)!
     }
     
-    var twoWeeksInMonth: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        let dayOfWeek = dateFormatter.string(from: endOfMonth(months: 1, days: 1))
-        if dayOfWeek == "Sunday" {
-            return endOfMonth(months: 1, days: 3)
-        } else if dayOfWeek == "Saturday" {
-            return endOfMonth(months: 1, days: 2)
-        }
-        
-        return endOfMonth(months: 1, days: 1)
-    }
-    
     var isTwoWeeksIn: Bool {
-        return self == endOfMonth(months: 1, days: 15)
+        return self == endOfMonth(months: 1, days: -15)
     }
     
     var isLastDate: Bool {
-        return self == endOfMonth(months: 1, days: 1)
+        return self == endOfMonth(months: 1, days: -1)
     }
 }
